@@ -15,7 +15,7 @@ const initUserMedalModel = (sequelize) => {
         },
         userId: {
             field: "user_id",
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             unique: false,
             references: {
                 model: usersTable,

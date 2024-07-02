@@ -2,7 +2,9 @@ import { initUserMedalModel } from "./users-medals.model.js"
 import { initUserModel } from "./users.model.js"
 import { initTaskModel } from "./tasks.model.js"
 import { initMedalModel } from "./medals.model.js"
+import { initScoreModel } from "./score.model.js"
 import db from "../Config/connection.js"
+
 
 
 const initModels = () => {
@@ -17,6 +19,9 @@ const initModels = () => {
 
     //initialize user-medal model
     initUserMedalModel(db);
+
+    //initialize score model
+    initScoreModel(db)
 }
 
 export default initModels

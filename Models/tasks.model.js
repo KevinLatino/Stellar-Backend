@@ -1,5 +1,5 @@
 import { Model, DataTypes } from "sequelize";
-import { tableUser } from "./users.model.js";
+import { usersTable } from "./users.model.js";
 
 const tasksTable = "tasks";
 
@@ -31,16 +31,16 @@ const initTaskModel = (sequelize) => {
             unique: false,
             type: DataTypes.UUID,
             references: {
-                model: tableUser, 
+                model: usersTable, 
                 key: "id",
             }
         }
     }, {
         sequelize,
         modelName: "Task",
-        tableName: tableName,
+        tableName: tasksTable,
         timestamps: false
     })
 }
 
-export {tableName, Task, initTaskModel}
+export {tasksTable, Task, initTaskModel}

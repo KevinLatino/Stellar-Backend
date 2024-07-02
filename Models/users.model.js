@@ -1,13 +1,12 @@
 import { DataTypes, Model} from "sequelize";
 
-const tableName = "users";
+const tableUser = "users";
 
 class User extends Model { }
 
 const initUserModel = (sequelize) => {
     User.init({
-        userId: {
-            field: "user_id",
+        id: {
             primaryKey: true,
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4
@@ -29,13 +28,12 @@ const initUserModel = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        
     }, {
         sequelize,
         modelName: "User",
-        tableName: tableName,
+        tableName: tableUser,
         timestamps: false
     })
 }
 
-export { tableName, User, initUserModel }
+export { tableUser, User, initUserModel }

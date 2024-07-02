@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+import { tableUser } from "./users.model.js";
 
 const tableName = "tasks";
 
@@ -6,8 +7,7 @@ class Task extends Model { }
 
 const initTaskModel = (sequelize) => {
     Task.init({
-        taskId: {
-            field: "task_id",
+        id: {
             primaryKey: true,
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4
@@ -25,6 +25,16 @@ const initTaskModel = (sequelize) => {
             values: ["espera", "normal", "urgente"],
             allowNull: false
         },
+        userId: {
+            field: "user_id",
+            unique: false,
+            type: DataTypes.UUID,
+            allowNull: true,
+            references: {
+                model: tableUser, 
+                key: "id",
+            }
+        }
     }, {
         sequelize,
         modelName: "Task",

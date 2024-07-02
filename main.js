@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import initModels from './Models/init.model.js';
+import initAssociations from './Models/associations.js';
 import db from './Config/connection.js'
 
 const app = express();
@@ -16,6 +17,8 @@ const initDataBase = async () => {
 
         // Inicializar los modelos de Sequelize
         initModels();
+
+        initAssociations();
 
         // Sincronizar los modelos con la base de datos
         await db.sync({ alter: true });

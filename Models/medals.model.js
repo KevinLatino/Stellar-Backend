@@ -6,8 +6,7 @@ class Medal extends Model { }
 
 const initMedalModel = (sequelize) => {
     Medal.init({
-        medalID: {
-            field: "medal_id",
+        id: {
             primaryKey: true,
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4

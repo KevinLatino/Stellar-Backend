@@ -1,6 +1,6 @@
 import { Model, DataTypes } from "sequelize";
 
-const tableName = "medals"
+const medalsTable = "medals"
 
 class Medal extends Model { }
 
@@ -26,9 +26,9 @@ const initMedalModel = (sequelize) => {
     }, {
         sequelize,
         modelName: "Medal",
-        tableName: tableName,
+        tableName: medalsTable,
         timestamps: false
     })
 }
 
-export { tableName, Medal, initMedalModel }
+export { medalsTable, Medal, initMedalModel }

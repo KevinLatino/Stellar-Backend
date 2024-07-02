@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import { tableUser } from "./users.model.js";
 
-const tableName = "tasks";
+const tasksTable = "tasks";
 
 class Task extends Model { }
 
@@ -26,10 +26,10 @@ const initTaskModel = (sequelize) => {
             allowNull: false
         },
         userId: {
+            allowNull: true,
             field: "user_id",
             unique: false,
             type: DataTypes.UUID,
-            allowNull: true,
             references: {
                 model: tableUser, 
                 key: "id",

@@ -11,26 +11,26 @@ app.use(cors);
 
 const initDataBase = async () => {
     try {
-        // Autenticar la conexión a la base de datos
         await db.authenticate();
-        console.log('Conexión a la base de datos establecida correctamente.');
+        console.log('Could not connect to the DB.');
 
-        // Inicializar los modelos de Sequelize
+        //initialize models of sequelizie that are created
         initModels();
 
         initAssociations();
 
-        // Sincronizar los modelos con la base de datos
+        //sync models of sequelize that are created
         await db.sync({ alter: true });
-        console.log('Modelos sincronizados correctamente con la base de datos.');
+        console.log('running.');
     } catch (error) {
-        console.error('Error al inicializar la base de datos:', error);
+        console.error('not running', error);
     }
 }
 
 const port = 3000;
 
 app.listen(port, () => console.log(`connected on port ${port}`));
+
 
 initDataBase();
 

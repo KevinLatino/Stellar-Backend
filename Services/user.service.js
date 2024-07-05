@@ -3,7 +3,12 @@ import bcrypt from 'bcrypt'
 
 class UserService {
 
-    async checkEmailRegistered(email){
+    async findByEmail(email) {
+        const findEmail = await User.findOne({ where: { email: email } })
+        return findEmail
+    }
+
+    async checkEmailRegistered(email) {
         const existingUser = await User.findOne({ where: { email } })
         if (existingUser) {
             throw new Error('The email is already registered');

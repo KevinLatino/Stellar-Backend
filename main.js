@@ -3,6 +3,7 @@ import cors from 'cors';
 import initRoutes from './Routes/initialize.routes.js';
 import initModels from './Models/init.model.js';
 import initAssociations from './Models/associations.js';
+import initStrategies from './Auth/init.strategies.js';
 import db from './Config/connection.js'
 
 const app = express();
@@ -16,6 +17,9 @@ const initDataBase = async () => {
         await db.authenticate();
         console.log('Could not connect to the DB.');
 
+        //initialize strategies
+        initStrategies();
+        
         //initialize models of sequelizie that are created
         initModels();
 

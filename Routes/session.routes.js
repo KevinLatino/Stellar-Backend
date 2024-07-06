@@ -2,7 +2,7 @@ import { Router } from "express";
 import passport from "passport";
 import SessionService from "../Services/session.service.js";
 
-const sessionService = new SessionService()
+const sessionService = new SessionService();
 const router = Router();
 
 router.post(
@@ -11,11 +11,10 @@ router.post(
     async (req, res, next) => {
         try {
             const user = req.user;
-            console.log(user);
-            const token = await sessionService.signJwt(user);
-            res.json({ user, token })
+            const newSession = await sessionService.createSession(user)
+            res.json(newSession);
         } catch (error) {
-            next(error)
+            next(error);
         }
     }
 );

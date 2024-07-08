@@ -19,4 +19,14 @@ router.post(
     }
 );
 
+router.post('/verifyToken', async (req, res, next) => {
+    try {
+        const token = req.body.token
+        const verify = await sessionService.verifyToken(token)
+        res.json(verify);
+    } catch (error) {
+        next(error);
+    }
+});
+
 export default router;

@@ -38,6 +38,14 @@ class SessionService {
         const newSession = await Session.create({ userId: user.id, token });
         return newSession 
     }
+
+    async verifyToken(token){
+        const session = await Session.findOne({ where: { token: token } });
+        if (!session) {
+            return false
+        }
+        return true;
+    }
 }
 
 export default SessionService

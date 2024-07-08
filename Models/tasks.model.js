@@ -25,6 +25,16 @@ const initTaskModel = (sequelize) => {
             values: ["espera", "normal", "urgente"],
             allowNull: false
         },
+        dueDate: {
+            field: "due_date",
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        completed: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
+        },
         userId: {
             allowNull: true,
             field: "user_id",
@@ -40,7 +50,7 @@ const initTaskModel = (sequelize) => {
         modelName: "Task",
         tableName: tasksTable,
         timestamps: false
-    })
+    });
 }
 
-export {tasksTable, Task, initTaskModel}
+export { tasksTable, Task, initTaskModel };

@@ -18,6 +18,7 @@ const initAssociations = () => {
     User.hasMany(Task, { as: "task", foreignKey: "userId" });
     Task.belongsTo(User, { as: "user" });
 
+    //A user can have many session, but a session just can have a user
     User.hasMany(Session, { as: "session", foreignKey: "userId" });
     Session.belongsTo(User, { as: "user" });
 

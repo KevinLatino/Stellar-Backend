@@ -8,7 +8,7 @@ router.post('/create', async (req, res, next) => {
     try {
         const userData = req.body
         const newUser = await userServices.createUser(userData);
-        res.json(newUser)   
+        res.json(newUser)
     } catch (error) {
         next(error)
     }
@@ -16,7 +16,10 @@ router.post('/create', async (req, res, next) => {
 
 router.put('/update/:id', async (req, res, next) => {
     try {
-        
+        const { id } = req.params
+        const userData = req.body;
+        const update = userServices.updateUser(id, userData)
+        res.json(update)
     } catch (error) {
         next(error)
     }

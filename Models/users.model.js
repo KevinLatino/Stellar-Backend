@@ -28,6 +28,11 @@ const initUserModel = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        secondLastName: {
+            field: "second_last_name",
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     }, {
         sequelize,
         modelName: "User",

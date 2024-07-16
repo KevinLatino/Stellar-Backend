@@ -1,4 +1,3 @@
-import { where } from "sequelize"
 import { User } from "../Models/users.model.js"
 import bcrypt from 'bcrypt'
 

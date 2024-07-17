@@ -3,8 +3,8 @@ import { Task } from '../Models/tasks.model.js'
 
 class TaskServices {
     
-    async getAllTasks() {
-        const getTasks = await Task.findAll();
+    async getAllTasks(id) {
+        const getTasks = await Task.findAll({ where: { userId: id }});
         return getTasks;
     }
 

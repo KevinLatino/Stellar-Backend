@@ -5,17 +5,26 @@ import passport from 'passport';
 const router = Router();
 const taskServices = new TaskServices();
 
-// Ruta para crear una nueva tarea
 router.post('/create',
-    passport.authenticate("jwt", {session: false}),
+    passport.authenticate("jwt", { session: false }),
     async (req, res, next) => {
+        try {
+            const taskData = req.body;
+            const newTask = await taskServices.createTask(taskData)
+            res.json(newTask)
+        } catch (error) {
+            next(error);
+        }
+    });
+
+router.get('/getTask/:userId', async (req, res, next) => {
     try {
-        const taskData = req.body;
-        const newTask = await taskServices.createTask(taskData)
-        res.json(newTask)
+        const { userId } = req.params;
+        const getTask = await taskServices.getAllTasks(userId);
+        res.json(getTask)
     } catch (error) {
-        next(error);
+        next(error)
     }
-});
+})
 
 export default router;

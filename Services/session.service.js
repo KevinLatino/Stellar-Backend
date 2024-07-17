@@ -16,7 +16,7 @@ class SessionService {
         const session = await Session.findByPk(token, {include: {
             model: User,
             as: "user",
-            attributes: ["name", "lastName"]
+            attributes: ["name", "lastName", "secondLastName"]
         }})
         return session
     }

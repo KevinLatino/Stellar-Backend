@@ -13,7 +13,7 @@ class TaskServices {
         return getTasks;
     }
 
-    async findById (id) {
+    async findById(id) {
         const findId = await Store.findByPk(id);
         return findId;
     }

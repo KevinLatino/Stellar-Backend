@@ -17,31 +17,38 @@ router.post('/create',
         }
     });
 
-    router.get('/urgent/:id', async (req, res) => {
-        try {
-            const tasks = await taskServices.getUrgentTasks(req.params.id);
-            res.json(tasks);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    });
-    
-    router.get('/waiting/:id', async (req, res) => {
-        try {
-            const tasks = await taskServices.getWaitingTasks(req.params.id);
-            res.json(tasks);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    });
-    
-    router.get('/normal/:id', async (req, res) => {
-        try {
-            const tasks = await taskServices.getNormalTasks(req.params.id);
-            res.json(tasks);
-        } catch (error) {
-            res.status(500).json({ error: error.message });
-        }
-    });
+router.get('/urgent/:id', async (req, res) => {
+    try {
+        const tasks = await taskServices.getUrgentTasks(req.params.id);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/waiting/:id', async (req, res) => {
+    try {
+        const tasks = await taskServices.getWaitingTasks(req.params.id);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/normal/:id', async (req, res) => {
+    try {
+        const tasks = await taskServices.getNormalTasks(req.params.id);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.put('/update/:id', async (req, res) => {
+    const { id } = req.params;
+    const bodyupDated = req.body;
+    const updateTask = await taskServices.upDateTask(id, bodyupDated);
+    return updateTask;
+})
 
 export default router;

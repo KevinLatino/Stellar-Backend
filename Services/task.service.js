@@ -1,10 +1,14 @@
 import { Task } from '../Models/tasks.model.js'
 
-
 class TaskServices {
     
-    async getAllTasks(id) {
-        const getTasks = await Task.findAll({ where: { userId: id }});
+    async getNotCompletedTasks(id) {
+        const getTasks = await Task.findAll({ 
+            where: { 
+                userId: id,
+                completed: false
+            }
+        });
         return getTasks;
     }
 

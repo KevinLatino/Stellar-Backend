@@ -20,7 +20,7 @@ router.post('/create',
 router.get('/getTask/:userId', async (req, res, next) => {
     try {
         const { userId } = req.params;
-        const getTask = await taskServices.getAllTasks(userId);
+        const getTask = await taskServices.getNotCompletedTasks(userId);
         res.json(getTask)
     } catch (error) {
         next(error)

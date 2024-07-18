@@ -2,6 +2,11 @@ import { Task } from '../Models/tasks.model.js'
 
 class TaskServices {
 
+    async findById(id) {
+        const findId = await Store.findByPk(id);
+        return findId;
+    }
+
     async getTasksByPriority(id, priority) {
         const getTasks = await Task.findAll({
             where: {
@@ -13,9 +18,14 @@ class TaskServices {
         return getTasks;
     }
 
-    async findById(id) {
-        const findId = await Store.findByPk(id);
-        return findId;
+    async getCompletedTask(id) {
+        const getTasks = await Task.findAll({
+            where: {
+                id: id,
+                completed: true
+            }
+        })
+        return getTasks
     }
 
     async getUrgentTasks(id) {

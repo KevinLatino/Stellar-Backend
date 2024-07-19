@@ -1,9 +1,9 @@
-import { Task } from '../Models/tasks.model.js'
+import { Task } from '../Models/tasks.model.js';
 
 class TaskServices {
 
     async findById(id) {
-        const findId = await Store.findByPk(id);
+        const findId = await Task.findByPk(id);
         return findId;
     }
 
@@ -21,11 +21,11 @@ class TaskServices {
     async getCompletedTask(id) {
         const getTasks = await Task.findAll({
             where: {
-                id: id,
+                userId: id,
                 completed: true
             }
-        })
-        return getTasks
+        });
+        return getTasks;
     }
 
     async getUrgentTasks(id) {
@@ -45,10 +45,43 @@ class TaskServices {
         return newTask;
     }
 
-    async upDateTask(id, upDateBody) {
+    async updateTask(id, updateBody) {
         const findId = await this.findById(id);
-        const update = await Task.update(findId, upDateBody);
-        return update
+        const update = await findId.update(updateBody);
+        return update;
+    }
+
+    async countCompletedUrgentTasks(userId) {
+        const count = await Task.count({
+            where: {
+                userId: userId,
+                completed: true,
+                priority: 'urgente'
+            }
+        });
+        return count;
+    }
+
+    async countCompletedNormalTasks(userId) {
+        const count = await Task.count({
+            where: {
+                userId: userId,
+                completed: true,
+                priority: 'normal'
+            }
+        });
+        return count;
+    }
+
+    async countCompletedWaitingTasks(userId){
+        const count = await Task.count({
+            where: {
+                userId: userId,
+                completed: true,
+                priority: 'espera'
+            }
+        })
+        return count;
     }
 }
 

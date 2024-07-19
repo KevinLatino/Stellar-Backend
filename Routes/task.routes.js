@@ -5,76 +5,84 @@ import passport from 'passport';
 const router = Router();
 const taskServices = new TaskServices();
 
-router.get('/urgent/:id', async (req, res) => {
-    try {
-        const tasks = await taskServices.getUrgentTasks(req.params.id);
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+router.get('/urgent/:id',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const tasks = await taskServices.getUrgentTasks(req.params.id);
+            res.json(tasks);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
 
-router.get('/waiting/:id', async (req, res) => {
-    try {
-        const tasks = await taskServices.getWaitingTasks(req.params.id);
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+router.get('/waiting/:id',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const tasks = await taskServices.getWaitingTasks(req.params.id);
+            res.json(tasks);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
 
-router.get('/normal/:id', async (req, res) => {
-    try {
-        const tasks = await taskServices.getNormalTasks(req.params.id);
-        res.json(tasks);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+router.get('/normal/:id',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const tasks = await taskServices.getNormalTasks(req.params.id);
+            res.json(tasks);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
 
-router.get('/completed/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const tasks = await taskServices.getCompletedTask(id);
-        res.json(tasks)
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+router.get('/completed/:id',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
+            const tasks = await taskServices.getCompletedTask(id);
+            res.json(tasks)
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
 
-router.get('/tasks/completed/urgent/:id',
+router.get('/completed/urgent/:id',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
             const { id } = req.params;
             const count = await taskServices.countCompletedUrgentTasks(id);
-            res.json({ count });
+            res.json(count);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     }
 );
 
-router.get('/tasks/completed/normal/:id',
+router.get('/completed/normal/:id',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
             const { id } = req.params;
             const count = await taskServices.countCompletedNormalTasks(id);
-            res.json({ count });
+            res.json(count);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }
     }
 );
 
-router.get('/tasks/completed/waiting/:id',
+router.get('/completed/waiting/:id',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
         try {
             const { id } = req.params;
             const count = await taskServices.countCompletedWaitingTasks(id);
-            res.json({ count });
+            res.json(count);
         } catch (error) {
             res.status(500).json({ error: error.message });
         }

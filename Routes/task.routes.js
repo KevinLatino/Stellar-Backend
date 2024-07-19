@@ -107,8 +107,6 @@ router.put('/update/:id',
         try {
             const { id } = req.params;
             const bodyUpdated = req.body;
-
-            // Verifica que el ID y bodyUpdated estén presentes
             if (!id) {
                 return res.status(400).json({ error: "ID is required" });
             }
@@ -125,6 +123,16 @@ router.put('/update/:id',
         } catch (error) {
             console.error("Error updating task:", error.message);
             res.status(500).json({ error: error.message });
+        }
+    });
+
+    router.get('/today/:userId', async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const tasks = await taskServices.getTodayTasks(userId);
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener las tareas de hoy', error: error.message });
         }
     });
 

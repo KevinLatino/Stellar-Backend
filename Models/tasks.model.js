@@ -51,6 +51,14 @@ const initTaskModel = (sequelize) => {
         tableName: tasksTable,
         timestamps: false
     });
+
+    Task.addHook('beforeSave', (task) => {
+        if (task.dueDate) {
+            task.dueDate = new Date(task.dueDate).toISOString();
+        }
+    });
 }
+
+
 
 export { tasksTable, Task, initTaskModel };

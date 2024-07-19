@@ -1,6 +1,5 @@
 import { Task } from '../Models/tasks.model.js';
 import { Op } from 'sequelize';
-import { startOfDay, endOfDay } from 'date-fns';
 
 class TaskServices {
 
@@ -86,18 +85,9 @@ class TaskServices {
         return count;
     }
     async getTodayTasks(userId) {
-        // Obtener la fecha y hora actuales
         const now = new Date();
-
-        // Establecer el inicio y el final del día de hoy en UTC
         const todayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
         const todayEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59));
-
-        // Imprimir para depuración
-        console.log('Hoy empieza:', todayStart.toISOString());
-        console.log('Hoy termina:', todayEnd.toISOString());
-
-        // Consultar las tareas de hoy
         const tasks = await Task.findAll({
             where: {
                 userId: userId,
@@ -106,10 +96,6 @@ class TaskServices {
                 }
             }
         });
-
-        // Imprimir para depuración
-        console.log('Tareas encontradas:', tasks);
-
         return tasks;
     }
 }

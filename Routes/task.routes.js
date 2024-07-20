@@ -126,7 +126,9 @@ router.put('/update/:id',
         }
     });
 
-    router.get('/today/:userId', async (req, res) => {
+router.get('/today/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
         try {
             const userId = req.params.userId;
             const tasks = await taskServices.getTodayTasks(userId);

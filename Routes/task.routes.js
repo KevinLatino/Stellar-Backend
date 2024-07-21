@@ -101,6 +101,31 @@ router.post('/create',
         }
     });
 
+
+router.get('/today/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const tasks = await taskServices.getTodayTasks(userId);
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener las tareas de hoy', error: error.message });
+        }
+    });
+
+router.get('/week/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const tasks = await taskServices.getTasksByCurrentWeek(userId);
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    });
+
 router.put('/update/:id',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
@@ -126,16 +151,7 @@ router.put('/update/:id',
         }
     });
 
-router.get('/today/:userId',
-    passport.authenticate("jwt", { session: false }),
-    async (req, res) => {
-        try {
-            const userId = req.params.userId;
-            const tasks = await taskServices.getTodayTasks(userId);
-            res.status(200).json(tasks);
-        } catch (error) {
-            res.status(500).json({ message: 'Error al obtener las tareas de hoy', error: error.message });
-        }
-    });
+
+
 
 export default router;

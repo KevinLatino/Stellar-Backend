@@ -4,127 +4,141 @@ import { Op } from 'sequelize';
 class TaskServices {
 
     async findById(id) {
-        const findId = await Task.findByPk(id);
-        return findId;
+        return await Task.findByPk(id);
     }
 
-    async getTasksByPriority(id, priority) {
-        const getTasks = await Task.findAll({
+    async getTasksByPriority(userId, priority, completed = false) {
+        return await Task.findAll({
             where: {
-                userId: id,
-                completed: false,
-                priority: priority
+                userId,
+                completed,
+                priority
             }
         });
-        return getTasks;
     }
 
-    async getCompletedTask(id) {
-        const getTasks = await Task.findAll({
+    async getCompletedTasks(userId) {
+        return await Task.findAll({
             where: {
-                userId: id,
+                userId,
                 completed: true
             }
         });
-        return getTasks;
     }
 
-    async getUrgentTasks(id) {
-        return this.getTasksByPriority(id, 'urgente');
+    async getUrgentTasks(userId) {
+        return this.getTasksByPriority(userId, 'urgente');
     }
 
-    async getWaitingTasks(id) {
-        return this.getTasksByPriority(id, 'espera');
+    async getWaitingTasks(userId) {
+        return this.getTasksByPriority(userId, 'espera');
     }
 
-    async getNormalTasks(id) {
-        return this.getTasksByPriority(id, 'normal');
+    async getNormalTasks(userId) {
+        return this.getTasksByPriority(userId, 'normal');
     }
 
     async getTodayTasks(userId) {
         const now = new Date();
         const todayStart = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 0, 0, 0));
         const todayEnd = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 23, 59, 59));
-        const tasks = await Task.findAll({
+        return await Task.findAll({
             where: {
-                userId: userId,
+                userId,
                 completed: false,
                 dueDate: {
                     [Op.between]: [todayStart, todayEnd]
                 }
             }
         });
-        return tasks;
     }
 
     async getTasksByCurrentWeek(userId) {
         const now = new Date();
-
-        const dayOfWeek = now.getDay(); 
-        const differenceToMonday = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek; 
+        const dayOfWeek = now.getDay();
+        const differenceToMonday = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek;
         const firstDayOfWeek = new Date(now.setDate(now.getDate() + differenceToMonday));
         firstDayOfWeek.setHours(0, 0, 0, 0);
 
         const lastDayOfWeek = new Date(firstDayOfWeek);
         lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6);
-        lastDayOfWeek.setHours(23, 59, 59, 999); 
+        lastDayOfWeek.setHours(23, 59, 59, 999);
 
-        const tasks = await Task.findAll({
+        return await Task.findAll({
             where: {
-                userId: userId,
+                userId,
                 completed: false,
                 dueDate: {
                     [Op.between]: [firstDayOfWeek, lastDayOfWeek]
                 }
             }
         });
-
-        return tasks;
-
     }
 
     async createTask(taskData) {
-        const newTask = await Task.create(taskData);
-        return newTask;
+        return await Task.create(taskData);
     }
 
     async updateTask(id, updateBody) {
-        const findId = await this.findById(id);
-        const update = await findId.update(updateBody);
-        return update;
+        const task = await this.findById(id);
+        if (!task) throw new Error('Task not found');
+        return await task.update(updateBody);
+    }
+
+    async countTasksByPriority(userId, priority, completed = false) {
+        return await Task.count({
+            where: {
+                userId,
+                completed,
+                priority
+            }
+        });
+    }
+
+    async countPendingUrgentTasks(userId) {
+        return this.countTasksByPriority(userId, 'urgente', false);
+    }
+
+    async countPendingNormalTasks(userId) {
+        return this.countTasksByPriority(userId, 'normal', false);
+    }
+
+    async countPendingWaitingTasks(userId) {
+        return this.countTasksByPriority(userId, 'espera', false);
     }
 
     async countCompletedUrgentTasks(userId) {
-        const count = await Task.count({
-            where: {
-                userId: userId,
-                completed: true,
-                priority: 'urgente'
-            }
-        });
-        return count;
+        return this.countTasksByPriority(userId, 'urgente', true);
     }
 
     async countCompletedNormalTasks(userId) {
-        const count = await Task.count({
-            where: {
-                userId: userId,
-                completed: true,
-                priority: 'normal'
-            }
-        });
-        return count;
+        return this.countTasksByPriority(userId, 'normal', true);
     }
 
     async countCompletedWaitingTasks(userId) {
-        const count = await Task.count({
+        return this.countTasksByPriority(userId, 'espera', true);
+    }
+
+    async totalPendingTasks(userId) {
+        return await Task.count({
             where: {
-                userId: userId,
-                completed: true,
-                priority: 'espera'
+                userId,
+                completed: false
             }
-        })
-        return count;
+        });
+    }
+
+    async getOverdueTasks(userId) {
+        const now = new Date();
+        return await Task.findAll({
+            where: {
+                userId,
+                completed: false,
+                dueDate: {
+                    [Op.lt]: now
+                }
+            }
+        });
     }
 }
 

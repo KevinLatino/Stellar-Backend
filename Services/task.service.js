@@ -140,6 +140,19 @@ class TaskServices {
             }
         });
     }
+
+    async countOverdueTasks(userId) {
+        const now = new Date();
+        return await Task.count({
+            where: {
+                userId,
+                completed: false,
+                dueDate: {
+                    [Op.lt]: now
+                }
+            }
+        });
+    }
 }
 
 export default TaskServices;

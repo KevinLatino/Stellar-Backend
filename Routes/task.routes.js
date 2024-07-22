@@ -139,6 +139,18 @@ router.get('/overdue/:userId',
         }
     });
 
+router.get('/total/overdue/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const userId = req.params.userId;
+            const tasks = await taskServices.countOverdueTasks(userId);
+            res.status(200).json(tasks);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener las tareas vencidas', error: error.message });
+        }
+    });
+
 router.get('/pending/urgent/:userId',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {

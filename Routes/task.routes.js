@@ -151,6 +151,7 @@ router.get('/total/overdue/:userId',
         }
     });
 
+
 router.get('/pending/urgent/:userId',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
@@ -225,7 +226,84 @@ router.put('/update/:id',
         }
     });
 
+router.get('/completed/january/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInJanuary(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
+router.get('/completed/february/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInFebruary(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
+router.get('/completed/march/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInMarch(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/completed/april/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInApril(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/completed/may/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInMay(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/completed/june/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInJune(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/completed/july/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInJuly(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/completed/august/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const tasks = await taskServices.getCompletedTasksInAugust(userId);
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 export default router;

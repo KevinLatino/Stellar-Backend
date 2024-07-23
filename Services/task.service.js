@@ -1,8 +1,13 @@
 import { Task } from '../Models/tasks.model.js';
 import { Op } from 'sequelize';
 
-class TaskServices {
+const getMonthStartEnd = (year, month) => {
+    const startDate = new Date(Date.UTC(year, month, 1, 0, 0, 0));
+    const endDate = new Date(Date.UTC(year, month + 1, 0, 23, 59, 59));
+    return { startDate, endDate };
+};
 
+class TaskServices {
     async findById(id) {
         return await Task.findByPk(id);
     }
@@ -152,6 +157,53 @@ class TaskServices {
                 }
             }
         });
+    }
+
+    async countCompletedTasksInMonth(userId, month) {
+        const year = new Date().getFullYear();
+        const { startDate, endDate } = getMonthStartEnd(year, month);
+
+        return await Task.count({
+            where: {
+                userId,
+                completed: true,
+                dueDate: {
+                    [Op.between]: [startDate, endDate]
+                }
+            }
+        });
+    }
+
+    async getCompletedTasksInJanuary(userId) {
+        return this.countCompletedTasksInMonth(userId, 0); 
+    }
+
+    async getCompletedTasksInFebruary(userId) {
+        return this.countCompletedTasksInMonth(userId, 1); 
+    }
+
+    async getCompletedTasksInMarch(userId) {
+        return this.countCompletedTasksInMonth(userId, 2); 
+    }
+
+    async getCompletedTasksInApril(userId) {
+        return this.countCompletedTasksInMonth(userId, 3); 
+    }
+
+    async getCompletedTasksInMay(userId) {
+        return this.countCompletedTasksInMonth(userId, 4);
+    }
+
+    async getCompletedTasksInJune(userId) {
+        return this.countCompletedTasksInMonth(userId, 5); 
+    }
+
+    async getCompletedTasksInJuly(userId) {
+        return this.countCompletedTasksInMonth(userId, 6); 
+    }
+
+    async getCompletedTasksInAugust(userId) {
+        return this.countCompletedTasksInMonth(userId, 7); 
     }
 }
 

@@ -306,4 +306,16 @@ router.get('/completed/august/:userId', async (req, res) => {
     }
 });
 
+router.get('/titles-dates/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const { userId } = req.params;
+            const tasks = await taskServices.getTitleAndDate(userId);
+            res.json(tasks)
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    })
+
 export default router;

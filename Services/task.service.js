@@ -174,20 +174,31 @@ class TaskServices {
         });
     }
 
+    async getTitleAndDate(userId) {
+        const findTasks = await Task.findAll({
+            attributes: ['title', 'dueDate'],
+            where: {
+                userId,
+                completed: false
+            }
+        });
+        return findTasks
+    }
+
     async getCompletedTasksInJanuary(userId) {
-        return this.countCompletedTasksInMonth(userId, 0); 
+        return this.countCompletedTasksInMonth(userId, 0);
     }
 
     async getCompletedTasksInFebruary(userId) {
-        return this.countCompletedTasksInMonth(userId, 1); 
+        return this.countCompletedTasksInMonth(userId, 1);
     }
 
     async getCompletedTasksInMarch(userId) {
-        return this.countCompletedTasksInMonth(userId, 2); 
+        return this.countCompletedTasksInMonth(userId, 2);
     }
 
     async getCompletedTasksInApril(userId) {
-        return this.countCompletedTasksInMonth(userId, 3); 
+        return this.countCompletedTasksInMonth(userId, 3);
     }
 
     async getCompletedTasksInMay(userId) {
@@ -195,15 +206,15 @@ class TaskServices {
     }
 
     async getCompletedTasksInJune(userId) {
-        return this.countCompletedTasksInMonth(userId, 5); 
+        return this.countCompletedTasksInMonth(userId, 5);
     }
 
     async getCompletedTasksInJuly(userId) {
-        return this.countCompletedTasksInMonth(userId, 6); 
+        return this.countCompletedTasksInMonth(userId, 6);
     }
 
     async getCompletedTasksInAugust(userId) {
-        return this.countCompletedTasksInMonth(userId, 7); 
+        return this.countCompletedTasksInMonth(userId, 7);
     }
 }
 

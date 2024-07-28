@@ -22,7 +22,7 @@ const initTaskModel = (sequelize) => {
         },
         priority: {
             type: DataTypes.ENUM,
-            values: ["espera", "normal", "urgente"],
+            values: ["Baja", "Moderada", "Alta"],
             allowNull: false
         },
         dueDate: {

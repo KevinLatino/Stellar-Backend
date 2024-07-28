@@ -32,15 +32,15 @@ class TaskServices {
     }
 
     async getUrgentTasks(userId) {
-        return this.getTasksByPriority(userId, 'urgente');
+        return this.getTasksByPriority(userId, 'Alta');
     }
 
     async getWaitingTasks(userId) {
-        return this.getTasksByPriority(userId, 'espera');
+        return this.getTasksByPriority(userId, 'Baja');
     }
 
     async getNormalTasks(userId) {
-        return this.getTasksByPriority(userId, 'normal');
+        return this.getTasksByPriority(userId, 'Moderada');
     }
 
     async getTodayTasks(userId) {
@@ -101,27 +101,27 @@ class TaskServices {
     }
 
     async countPendingUrgentTasks(userId) {
-        return this.countTasksByPriority(userId, 'urgente', false);
+        return this.countTasksByPriority(userId, 'Alta', false);
     }
 
     async countPendingNormalTasks(userId) {
-        return this.countTasksByPriority(userId, 'normal', false);
+        return this.countTasksByPriority(userId, 'Moderada', false);
     }
 
     async countPendingWaitingTasks(userId) {
-        return this.countTasksByPriority(userId, 'espera', false);
+        return this.countTasksByPriority(userId, 'Baja', false);
     }
 
     async countCompletedUrgentTasks(userId) {
-        return this.countTasksByPriority(userId, 'urgente', true);
+        return this.countTasksByPriority(userId, 'Alta', true);
     }
 
     async countCompletedNormalTasks(userId) {
-        return this.countTasksByPriority(userId, 'normal', true);
+        return this.countTasksByPriority(userId, 'Moderada', true);
     }
 
     async countCompletedWaitingTasks(userId) {
-        return this.countTasksByPriority(userId, 'espera', true);
+        return this.countTasksByPriority(userId, 'Baja', true);
     }
 
     async totalPendingTasks(userId) {

@@ -176,7 +176,7 @@ class TaskServices {
 
     async getTitleAndDate(userId) {
         const findTasks = await Task.findAll({
-            attributes: ['title', 'dueDate'],
+            attributes: ['title', 'dueDate', 'priority'],
             where: {
                 userId,
                 completed: false

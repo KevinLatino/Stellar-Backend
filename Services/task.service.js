@@ -216,6 +216,19 @@ class TaskServices {
     async getCompletedTasksInAugust(userId) {
         return this.countCompletedTasksInMonth(userId, 7);
     }
+
+    async deleteTask(id) {
+        const deleted = await Task.destroy({
+            where: {
+                id: id
+            }
+        })
+        if (deleted) {
+            return `Task with id ${id} was deleted.`;
+        } else {
+            return `Task with id ${id} not found.`;
+        }
+    }
 }
 
 export default TaskServices;

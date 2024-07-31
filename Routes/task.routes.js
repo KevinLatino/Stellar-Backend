@@ -318,4 +318,14 @@ router.get('/titles-dates/:userId',
         }
     })
 
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const deleteTask = await taskServices.deleteTask(id);
+        res.json(deleteTask)
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
 export default router;

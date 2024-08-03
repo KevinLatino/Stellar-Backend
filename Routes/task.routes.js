@@ -226,7 +226,9 @@ router.put('/update/:id',
         }
     });
 
-router.get('/completed/january/:userId', async (req, res) => {
+router.get('/completed/january/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInJanuary(userId);
@@ -236,7 +238,9 @@ router.get('/completed/january/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/february/:userId', async (req, res) => {
+router.get('/completed/february/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInFebruary(userId);
@@ -246,7 +250,9 @@ router.get('/completed/february/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/march/:userId', async (req, res) => {
+router.get('/completed/march/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInMarch(userId);
@@ -256,7 +262,9 @@ router.get('/completed/march/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/april/:userId', async (req, res) => {
+router.get('/completed/april/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInApril(userId);
@@ -266,7 +274,9 @@ router.get('/completed/april/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/may/:userId', async (req, res) => {
+router.get('/completed/may/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInMay(userId);
@@ -276,7 +286,9 @@ router.get('/completed/may/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/june/:userId', async (req, res) => {
+router.get('/completed/june/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInJune(userId);
@@ -286,7 +298,9 @@ router.get('/completed/june/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/july/:userId', async (req, res) => {
+router.get('/completed/july/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInJuly(userId);
@@ -296,7 +310,9 @@ router.get('/completed/july/:userId', async (req, res) => {
     }
 });
 
-router.get('/completed/august/:userId', async (req, res) => {
+router.get('/completed/august/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     try {
         const { userId } = req.params;
         const tasks = await taskServices.getCompletedTasksInAugust(userId);
@@ -318,14 +334,16 @@ router.get('/titles-dates/:userId',
         }
     })
 
-router.delete('/delete/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const deleteTask = await taskServices.deleteTask(id);
-        res.json(deleteTask)
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-})
+router.delete('/delete/:id',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+        try {
+            const { id } = req.params;
+            const deleteTask = await taskServices.deleteTask(id);
+            res.json(deleteTask)
+        } catch (error) {
+            res.status(500).json({ error: error.message });
+        }
+    })
 
 export default router;

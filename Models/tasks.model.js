@@ -41,16 +41,19 @@ const initTaskModel = (sequelize) => {
             unique: false,
             type: DataTypes.UUID,
             references: {
-                model: usersTable, 
+                model: usersTable,
                 key: "id",
-            }
+            },
+            onUpdate: "CASCADE",
+            onDelete: "SET NULL"
         }
-    }, {
-        sequelize,
-        modelName: "Task",
-        tableName: tasksTable,
-        timestamps: false
-    });
+    },
+        {
+            sequelize,
+            modelName: "Task",
+            tableName: tasksTable,
+            timestamps: false,
+        });
 
     Task.addHook('beforeSave', (task) => {
         if (task.dueDate) {

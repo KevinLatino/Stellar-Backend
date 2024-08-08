@@ -33,8 +33,6 @@ const initUserModel = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "User",

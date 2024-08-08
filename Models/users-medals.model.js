@@ -31,8 +31,6 @@ const initUserMedalModel = (sequelize) => {
                 key: "id"
             }
         },
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "UserMedal",

@@ -23,9 +23,6 @@ const initMedalModel = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-
-        onUpdate: "CASCADE",
-        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "Medal",

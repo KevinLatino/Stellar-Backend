@@ -12,6 +12,10 @@ const initScoreModel = (sequelize) =>{
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4
         },
+        score: {
+            type: DataTypes.FLOAT,
+            allowNull: false,
+        },
         userId: {
             field: "user_id",
             type: DataTypes.UUID,
@@ -22,10 +26,6 @@ const initScoreModel = (sequelize) =>{
                 key: "id"
             }
         },
-        score: {
-            type: DataTypes.FLOAT,
-            allowNull: false,
-        }
     }, {
         sequelize,
         modelName: "Score",

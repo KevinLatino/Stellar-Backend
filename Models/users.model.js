@@ -1,4 +1,4 @@
-import { DataTypes, Model} from "sequelize";
+import { DataTypes, Model } from "sequelize";
 
 const usersTable = "users";
 
@@ -32,7 +32,9 @@ const initUserModel = (sequelize) => {
             field: "second_last_name",
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "User",

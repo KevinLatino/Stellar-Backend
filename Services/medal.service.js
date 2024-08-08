@@ -1,4 +1,4 @@
-import { Medal } from "../Models/medals.model";
+import { Medal } from "../Models/medals.model.js";
 
 class MedalService {
 

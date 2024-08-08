@@ -30,7 +30,9 @@ const initUserMedalModel = (sequelize) => {
                 model: medalsTable,
                 key: "id"
             }
-        }
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "UserMedal",

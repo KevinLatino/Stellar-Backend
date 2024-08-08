@@ -20,7 +20,9 @@ const initSessionModel = (sequelize) => {
                 model: usersTable,
                 key: "id",
             }
-        }
+        },
+        onUpdate: "CASCADE",
+        onDelete: "SET NULL"
     }, {
         sequelize,
         modelName: "Sessions",

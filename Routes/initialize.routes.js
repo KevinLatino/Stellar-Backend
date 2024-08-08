@@ -8,7 +8,7 @@ const initRoutes = (app) => {
     app.use('/users', UserRoutes)
     app.use('/sessions', SessionRoutes);
     app.use('/tasks', TaskRoutes)
-    app.use('/medal', MedalRoutes)
+    app.use('/medals', MedalRoutes)
 }
 
 export default initRoutes

@@ -10,6 +10,7 @@ const initRoutes = (app) => {
     app.use('/sessions', SessionRoutes);
     app.use('/tasks', TaskRoutes)
     app.use('/medals', MedalRoutes)
+    app.use('/user-medal', UserMedalRoutes);
 }
 
 export default initRoutes

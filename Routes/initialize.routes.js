@@ -2,6 +2,7 @@ import SessionRoutes from './session.routes.js'
 import UserRoutes from './user.routes.js';
 import TaskRoutes from './task.routes.js'
 import MedalRoutes from './medal.routes.js'
+import UserMedalRoutes from './user-medal.routes.js'
 
 
 const initRoutes = (app) => {

@@ -29,16 +29,6 @@ const initMedalModel = (sequelize) => {
             values: ["Goals", "Eisenhower", "Podomoro", "Dates", "Environment", "Mindfulness"],
             allowNull: false
         },
-        userId: {
-            field: "user_id",
-            type: DataTypes.UUID,
-            allowNull: true,
-            unique: true,
-            references: {
-                model: usersTable,
-                key: "id"
-            }
-        }
     }, {
         sequelize,
         modelName: "Medal",

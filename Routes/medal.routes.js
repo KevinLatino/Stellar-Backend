@@ -1,5 +1,6 @@
 import { Router } from "express";
 import MedalService from "../Services/medal.service.js";
+import passport from "passport";
 
 const medalServices = new MedalService();
 
@@ -21,14 +22,31 @@ router.get('/find/:id', async (req, res, next) => {
     res.json(medal)
 })
 
-router.get('/findAll', async (req, res, next) => {
-    try {
-        const medals = await medalServices.findAllMedals();
-        res.json(medals);
-    } catch (error) {
-        next(error);
-    }
-});
+router.get('/findAll/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res, next) => {
+        try {
+            const userId = req.params.userId;
+            const medals = await medalServices.findAllMedals(userId);
+            res.json(medals);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+router.get('/findPodomoro/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res, next) => {
+        try {
+            const userId = req.params.userId;
+            const podomoroMedals = await medalServices.findPodomoroMedals(userId);
+            res.json(podomoroMedals);
+        } catch (error) {
+            next(error);
+        }
+    });
+
+
 
 export default router
 

@@ -7,8 +7,12 @@ class MedalService {
         return foundId
     }
 
-    async findAllMedals() {
-        const medals = await Medal.findAll();
+    async findAllMedals(userId) {
+        const medals = await Medal.findAll({
+            where: {
+                userId
+            }
+        });
         return medals;
     }
 
@@ -25,6 +29,7 @@ class MedalService {
         })
         return medal
     }
+
 }
 
 export default MedalService

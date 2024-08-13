@@ -22,7 +22,7 @@ const initUserMedalModel = (sequelize) => {
                 key: "id"
             }
         },
-        medalID: {
+        medalId: {
             field: "medal_id",
             type: DataTypes.UUID,
             defaultValue: UUIDV4,

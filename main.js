@@ -11,6 +11,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
 const initDataBase = async () => {
     try {
         //Authenticate db

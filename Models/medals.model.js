@@ -1,4 +1,5 @@
 import { Model, DataTypes } from "sequelize";
+import { usersTable } from './users.model.js';
 
 const medalsTable = "medals"
 
@@ -23,6 +24,21 @@ const initMedalModel = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        module: {
+            type: DataTypes.ENUM,
+            values: ["Goals", "Eisenhower", "Podomoro", "Dates", "Environment", "Mindfulness"],
+            allowNull: false
+        },
+        userId: {
+            field: "user_id",
+            type: DataTypes.UUID,
+            allowNull: true,
+            unique: true,
+            references: {
+                model: usersTable,
+                key: "id"
+            }
+        }
     }, {
         sequelize,
         modelName: "Medal",

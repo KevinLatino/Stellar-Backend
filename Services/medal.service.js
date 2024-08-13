@@ -7,6 +7,11 @@ class MedalService {
         return foundId
     }
 
+    async findAllMedals() {
+        const medals = await Medal.findAll();
+        return medals;
+    }
+
     async createMedal(medalBody) {
         const createMedal = await Medal.create(medalBody);
         return createMedal

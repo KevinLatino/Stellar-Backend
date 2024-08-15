@@ -62,7 +62,7 @@ class UserService {
                 {
                     model: Medal,
                     as: "medals",
-                    where: { title: 'GoalMedal' }, 
+                    where: { title: 'Goals' }, 
                     through: {
                         model: UserMedal,
                         attributes: []

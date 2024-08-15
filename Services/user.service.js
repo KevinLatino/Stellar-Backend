@@ -1,5 +1,7 @@
 import { User } from "../Models/users.model.js"
 import bcrypt from 'bcrypt'
+import { Medal } from "../Models/medals.model.js"
+import { UserMedal } from "../Models/users-medals.model.js"
 
 class UserService {
 
@@ -34,6 +36,26 @@ class UserService {
         const updateUser = await findUser.update(userData);
         return updateUser;
     }
+
+    async getAllMedals(userId) {
+        const userWithMedals = await User.findAll({
+            where: { id: userId },
+            include: [
+                {
+                    model: Medal,
+                    as: "medals",
+                    through: {
+                        model: UserMedal,
+                        attributes: [] 
+                    },
+                    attributes: [ 'title', 'description', 'image'] 
+                }
+            ]
+        });
+    
+        return userWithMedals;
+    }
+    
 }
 
 export default UserService;

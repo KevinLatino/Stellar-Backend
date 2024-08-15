@@ -30,5 +30,11 @@ router.put('/update/:id',
         }
     })
 
+    router.get('/:userId/medals', async (req, res) => {
+        const { userId } = req.params;
+        const getAllTasks = await userServices.getAllMedals(userId);
+        res.json(getAllTasks)
+    });
+
 
 export default router

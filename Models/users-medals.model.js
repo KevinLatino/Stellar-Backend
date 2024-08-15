@@ -16,7 +16,6 @@ const initUserMedalModel = (sequelize) => {
         userId: {
             field: "user_id",
             type: DataTypes.UUID,
-            unique: false,
             references: {
                 model: usersTable,
                 key: "id"
@@ -25,7 +24,6 @@ const initUserMedalModel = (sequelize) => {
         medalId: {
             field: "medal_id",
             type: DataTypes.UUID,
-            defaultValue: UUIDV4,
             references: {
                 model: medalsTable,
                 key: "id"
@@ -39,4 +37,4 @@ const initUserMedalModel = (sequelize) => {
     })
 }
 
-export { userMedalTable, UserMedal, initUserMedalModel }
+export { userMedalTable, UserMedal, initUserMedalModel };

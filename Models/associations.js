@@ -22,11 +22,10 @@ const initAssociations = () => {
     User.hasMany(Session, { as: "session", foreignKey: "userId" });
     Session.belongsTo(User, { as: "user" });
 
-    //Associations N to N
 
-    //A user can have many Medals and a medal can have many users
-    User.belongsToMany(Medal, { as: "medal", through: UserMedal, foreignKey: "userId", otherKey: "medalID" });
-    Medal.belongsToMany(User, { as: "user", through: UserMedal, foreignKey: "medalID", otherKey: "userId" });
+   //A user can have many Medals and a medal can have many users
+   User.belongsToMany(Medal, { as: "medals", through: UserMedal, foreignKey: "userId", otherKey: "medalId" });
+   Medal.belongsToMany(User, { as: "users", through: UserMedal, foreignKey: "medalId", otherKey: "userId" });   
 }
 
 export default initAssociations

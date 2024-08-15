@@ -12,9 +12,7 @@ router.post(
         try {
             const user = req.user;
             const newSession = await sessionService.createSession(user)
-            console.log(newSession);
             const session = await sessionService.findById(newSession.token)
-            console.log(session);
             res.json(session);
         } catch (error) {
             next(error);

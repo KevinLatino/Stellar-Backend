@@ -1,5 +1,4 @@
 import { Model, DataTypes } from "sequelize";
-import { usersTable } from './users.model.js';
 
 const medalsTable = "medals"
 

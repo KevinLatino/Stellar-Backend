@@ -38,7 +38,6 @@ class UserService {
     }
 
     async getAllMedals(userId) {
-        // Encuentra el usuario con sus medallas
         const userWithMedals = await User.findOne({
             where: { id: userId },
             include: [
@@ -47,14 +46,12 @@ class UserService {
                     as: "medals",
                     through: {
                         model: UserMedal,
-                        attributes: [] // Excluye atributos del modelo de asociación
+                        attributes: []
                     },
                     attributes: ['title', 'description', 'image']
                 }
             ]
         });
-    
-        // Extrae y devuelve solo las medallas
         return userWithMedals?.medals || [];
     }
     

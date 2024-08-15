@@ -1,9 +1,8 @@
 import { UserMedal } from "../Models/users-medals.model.js";
-import { Medal } from "../Models/medals.model.js";
 
 class UserMedalServices {
 
-    async addSetGoalMedal(userId, medalId) {
+    async addMedal(userId, medalId) {
         const existingMedal = await UserMedal.findOne({
             where: {
                 userId: userId,
@@ -21,6 +20,30 @@ class UserMedalServices {
         });
 
         return addMedal;
+    }
+
+    async addSetGoalMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
+    }
+
+    async addEisenhowerMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
+    }
+
+    async addPodomoroMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
+    }
+
+    async addDatesMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
+    }
+
+    async addEnvironmentMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
+    }
+
+    async addMindfulnessMedal(userId, medalId) {
+        return this.addMedal(userId, medalId);
     }
 }
 

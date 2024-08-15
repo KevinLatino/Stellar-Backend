@@ -54,6 +54,26 @@ class UserService {
         });
         return userWithMedals?.medals || [];
     }
+
+    async checkUserHasGoalMedal(userId) {
+        const userWithMedal = await User.findOne({
+            where: { id: userId },
+            include: [
+                {
+                    model: Medal,
+                    as: "medals",
+                    where: { title: 'GoalMedal' }, 
+                    through: {
+                        model: UserMedal,
+                        attributes: []
+                    },
+                    attributes: ['title']
+                }
+            ]
+        });
+
+        return userWithMedal?.medals?.length > 0;
+    }
     
     
 }

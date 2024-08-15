@@ -1,72 +1,63 @@
-import { User } from "../Models/users.model.js"
-import bcrypt from 'bcrypt'
-import { Medal } from "../Models/medals.model.js"
-import { UserMedal } from "../Models/users-medals.model.js"
+import { User } from "../Models/users.model.js";
+import bcrypt from 'bcrypt';
+import { Medal } from "../Models/medals.model.js";
+import { UserMedal } from "../Models/users-medals.model.js";
 
 class UserService {
 
     async findByEmail(email) {
-        const findEmail = await User.findOne({ where: { email: email } })
-        return findEmail
+        return User.findOne({ where: { email } });
     }
 
     async checkEmailRegistered(email) {
-        const existingUser = await this.findByEmail(email)
+        const existingUser = await this.findByEmail(email);
         if (existingUser) {
             throw new Error('The email is already registered');
         }
     }
+
     async createUser(userData) {
-        await this.checkEmailRegistered(userData.email)
+        await this.checkEmailRegistered(userData.email);
         const hashedPassword = await bcrypt.hash(userData.password, 10);
-        const newUser = await User.create({
+        return User.create({
             ...userData,
             password: hashedPassword
-        })
-        return newUser;
+        });
     }
 
-    async findByid(id) {
-        const findId = await User.findByPk(id)
-        return findId
+    async findById(id) {
+        return User.findByPk(id);
     }
 
     async updateUser(id, userData) {
-        const findUser = await this.findByid(id);
-        const updateUser = await findUser.update(userData);
-        return updateUser;
+        const user = await this.findById(id);
+        return user.update(userData);
     }
 
     async getAllMedals(userId) {
-        const userWithMedals = await User.findOne({
+        const user = await User.findOne({
             where: { id: userId },
             include: [
                 {
                     model: Medal,
                     as: "medals",
-                    through: {
-                        model: UserMedal,
-                        attributes: []
-                    },
+                    through: { model: UserMedal, attributes: [] },
                     attributes: ['title', 'description', 'image']
                 }
             ]
         });
-        return userWithMedals?.medals || [];
+        return user?.medals || [];
     }
 
-    async checkUserHasGoalMedal(userId) {
+    async checkUserHasMedal(userId, medalTitle) {
         const userWithMedal = await User.findOne({
             where: { id: userId },
             include: [
                 {
                     model: Medal,
                     as: "medals",
-                    where: { title: 'Goals' }, 
-                    through: {
-                        model: UserMedal,
-                        attributes: []
-                    },
+                    where: { title: medalTitle },
+                    through: { model: UserMedal, attributes: [] },
                     attributes: ['title']
                 }
             ]
@@ -74,8 +65,30 @@ class UserService {
 
         return userWithMedal?.medals?.length > 0;
     }
-    
-    
+
+    async checkUserHasGoalMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Goals');
+    }
+
+    async checkUserHasEisenhowerMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Eisenhower');
+    }
+
+    async checkUserHasPodomoroMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Podomoro');
+    }
+
+    async checkUserHasDatesMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Dates');
+    }
+
+    async checkUserHasEnvironmentMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Environment');
+    }
+
+    async checkUserHasMindfulnessMedal(userId) {
+        return this.checkUserHasMedal(userId, 'Mindfulness');
+    }
 }
 
 export default UserService;

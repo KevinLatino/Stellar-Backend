@@ -44,37 +44,32 @@ router.get('/checkGoalMedal/:userId', async (req, res) => {
 
 router.get('/checkEisenhowerMedal/:userId', async (req, res) => {
     const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    const checkMedal = await userServices.checkUserHasEisenhowerMedal(userId);
     res.json(checkMedal)
 })
 
 router.get('/checkPodomoroMedal/:userId', async (req, res) => {
     const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    const checkMedal = await userServices.checkUserHasPodomoroMedal(userId);
     res.json(checkMedal)
 })
 
 router.get('/checkDateMedal/:userId', async (req, res) => {
     const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    const checkMedal = await userServices.checkUserHasDatesMedal(userId);
     res.json(checkMedal)
 })
 
-router.get('/checkDateMedal/:userId', async (req, res) => {
-    const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
-    res.json(checkMedal)
-})
 
 router.get('/checkEnvironmentMedal/:userId', async (req, res) => {
     const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    const checkMedal = await userServices.checkUserHasEnvironmentMedal(userId);
     res.json(checkMedal)
 })
 
 router.get('/checkMindfulnessMedal/:userId', async (req, res) => {
     const { userId } = req.params;
-    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    const checkMedal = await userServices.checkUserHasMindfulnessMedal(userId);
     res.json(checkMedal)
 })
 

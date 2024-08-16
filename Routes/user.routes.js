@@ -53,11 +53,22 @@ router.get('/checkPodomoroMedal/:userId', async (req, res) => {
     const checkMedal = await userServices.checkUserHasGoalMedal(userId);
     res.json(checkMedal)
 })
+
 router.get('/checkDateMedal/:userId', async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasGoalMedal(userId);
     res.json(checkMedal)
 })
+
+router.get('/checkDateMedal/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    res.json(checkMedal)
+})
+
+
+
+
 
 
 

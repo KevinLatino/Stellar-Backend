@@ -66,6 +66,13 @@ router.get('/checkDateMedal/:userId', async (req, res) => {
     res.json(checkMedal)
 })
 
+router.get('/checkEnvironmentMedal/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    res.json(checkMedal)
+})
+
+
 
 
 

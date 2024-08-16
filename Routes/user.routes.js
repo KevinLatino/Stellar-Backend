@@ -30,54 +30,61 @@ router.put('/update/:id',
         }
     })
 
-router.get('/medals/:userId', async (req, res) => {
+router.get('/medals/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const getAllTasks = await userServices.getAllMedals(userId);
     res.json(getAllTasks)
 });
 
-router.get('/checkGoalMedal/:userId', async (req, res) => {
+router.get('/checkGoalMedal/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasGoalMedal(userId);
     res.json(checkMedal)
 })
 
-router.get('/checkEisenhowerMedal/:userId', async (req, res) => {
+router.get('/checkEisenhowerMedal/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasEisenhowerMedal(userId);
     res.json(checkMedal)
 })
 
-router.get('/checkPodomoroMedal/:userId', async (req, res) => {
+router.get('/checkPodomoroMedal/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasPodomoroMedal(userId);
     res.json(checkMedal)
 })
 
-router.get('/checkDateMedal/:userId', async (req, res) => {
+router.get('/checkDateMedal/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasDatesMedal(userId);
     res.json(checkMedal)
 })
 
 
-router.get('/checkEnvironmentMedal/:userId', async (req, res) => {
+router.get('/checkEnvironmentMedal/:userId',
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasEnvironmentMedal(userId);
     res.json(checkMedal)
 })
 
-router.get('/checkMindfulnessMedal/:userId', async (req, res) => {
+router.get('/checkMindfulnessMedal/:userId', 
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
     const { userId } = req.params;
     const checkMedal = await userServices.checkUserHasMindfulnessMedal(userId);
     res.json(checkMedal)
 })
-
-
-
-
-
-
-
 
 export default router

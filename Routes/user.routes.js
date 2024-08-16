@@ -48,5 +48,11 @@ router.get('/checkEisenhowerMedal/:userId', async (req, res) => {
     res.json(checkMedal)
 })
 
+router.get('/checkPodomoroMedal/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const checkMedal = await userServices.checkUserHasGoalMedal(userId);
+    res.json(checkMedal)
+})
+
 
 export default router

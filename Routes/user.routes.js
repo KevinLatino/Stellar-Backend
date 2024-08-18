@@ -6,7 +6,6 @@ const userServices = new UserService();
 const router = Router();
 
 router.post('/create',
-    passport.authenticate("jwt", { session: false }),
     async (req, res, next) => {
         try {
             const userData = req.body

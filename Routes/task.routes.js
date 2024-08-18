@@ -99,7 +99,8 @@ router.post('/create',
         } catch (error) {
             next(error);
         }
-    });
+    }
+);
 
 
 router.get('/today/:userId',

@@ -1,6 +1,6 @@
 ## <img src="https://github.com/user-attachments/assets/842b2cbe-3b60-49d4-9d08-949c01d1043e" width="230"> ##
 
-Welcome to Stellar's Frontend! Stellar is a web application created to help students manage their tasks in an interactive way, With Stellar you can learn different ways to improve your personal productivity. 📚🌠🎖️
+Welcome to Stellar's Backend! Stellar is a web application created to help students manage their tasks in an interactive way, With Stellar you can learn different ways to improve your personal productivity. 📚🌠🎖️
 
 
 ##  Check out what Stellar offers 👀 ##

@@ -53,7 +53,7 @@ router.get('/checkEisenhowerMedal/:userId',
     res.json(checkMedal)
 })
 
-router.get('/checkPodomoroMedal/:userId',
+router.get('/checkPomodoroMedal/:userId',
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
     const { userId } = req.params;

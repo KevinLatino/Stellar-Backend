@@ -6,9 +6,13 @@ import initAssociations from './Models/associations.js';
 import initStrategies from './Auth/init.strategies.js';
 import db from './Config/connection.js'
 
+//functionalities of express
 const app = express();
 
+//cors
 app.use(cors());
+
+//the backend can receive json files
 app.use(express.json());
 
 

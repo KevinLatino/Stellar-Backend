@@ -21,7 +21,7 @@ Welcome to Stellar's Backend! Stellar is a web application created to help stude
   <img width="12" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" height="50" alt="postgresql logo"  />
   <img width="12" />
-  <img src="https://github.com/user-attachments/assets/69ec2942-960f-4f64-9aa1-2e36ca1ac023" height="40" alt="neon logo"  />
+  <img src="https://github.com/user-attachments/assets/69ec2942-960f-4f64-9aa1-2e36ca1ac023" height="42" alt="neon logo"  />
 </div>
 
 ## Just a Dashboard ScreenShot 📷 ## 
